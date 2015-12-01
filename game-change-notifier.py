@@ -13,11 +13,14 @@ def get_config():
 		api_key = config_data["api_key"]
 		client_id = config_data["client_id"]
 		oauth = config_data["oauth"]
-		return api_key, client_id, oauth
+		streamer = config_data["streamer"]
+		return api_key, client_id, oauth, streamer
 	else:
-		cfg = {"api_key":"",
-			   "client_id": "",
-			   "oauth": ""}
+		cfg = {	
+			"api_key":"",
+			"client_id": "",
+			"oauth": ""
+		}
 		json.dump(cfg, open("config.cfg", "w"))
 
 ### Send a pushbullet notification with streamer and game ###
@@ -31,7 +34,6 @@ def check_stream(streamer, client_id, url, oauth):
 		"client_id": client_id,
 		"Authorization": "OAuth {0}".format(oauth)
 	}
-	new_url = url + streamer
 	### Request json about the streamer ###
 	data = requests.get(new_url, headers=headers)
 	### Check the responses status code and act accordingly ###
@@ -50,7 +52,7 @@ def check_stream(streamer, client_id, url, oauth):
 
 if __name__ == "__main__":
 	### Url to Twitch API (see https://github.com/justintv/Twitch-API) ###
-	url = "http://api.twitch.tv/kraken/streams/"
-	api_key, client_id, oauth = get_config()
+	api_key, client_id, oauth, streamer = get_config()
+	url = "http://api.twitch.tv/kraken/streams/{0}".format(streamer)
 	pb = Pushbullet(api_key)
-	check_stream("lirik", client_id, url, oauth)
+	check_stream(streamer, client_id, url, oauth)
