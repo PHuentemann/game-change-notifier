@@ -11,13 +11,13 @@ import os
 import gc
 
 class GameChanger(object):
-
+	"""Check for a game change of a twitch streamer"""
 	def __init__(self):
-		logging.basicConfig(filename='log.txt', level=logging.DEBUG, 
+		logging.basicConfig(filename='log.txt', level=logging.DEBUG,
 							format='%(asctime)s - %(levelname)s - %(message)s')
 		api_key, client_id, oauth, streamers = self.get_config()
 		self.init_db()
-		self.pb = Pushbullet(api_key)
+		self.pbullet = Pushbullet(api_key)
 		for streamer in streamers:
 			### Url to Twitch API (see https://github.com/justintv/Twitch-API) ###
 			url = "https://api.twitch.tv/kraken/streams/{0}".format(streamer)
@@ -25,6 +25,7 @@ class GameChanger(object):
 
 	### Get the config data from "config.cfg" file in same folder ###
 	def get_config(self):
+		"""Get config settings from config.cfg"""
 		if os.path.isfile("config.cfg"):
 			config_data = json.load(open("config.cfg"))
 			api_key = config_data["api_key"]
@@ -45,6 +46,7 @@ class GameChanger(object):
 
 	### Initialize the database if not yet initiated ###
 	def init_db(self):
+		"""Initialize the database if not already done"""
 		if not os.path.isfile("games.db"):
 			logging.debug("Initiating database.")
 			conn = sqlite3.connect("games.db")
@@ -59,6 +61,7 @@ class GameChanger(object):
 
 	### Check the database for the streamer and game ###
 	def check_db(self, streamer, game):
+		"""Check the database entry for a given streamer"""
 		conn = sqlite3.connect("games.db")
 		cursor = conn.cursor()
 		cursor.execute("""SELECT * FROM games WHERE streamer=?""", (streamer,))
@@ -76,11 +79,13 @@ class GameChanger(object):
 
 	### Send a pushbullet notification with streamer and game ###
 	def send_notification(self, streamer, game):
+		"""Send a pushbullet notification to the user"""
 		logging.debug("Sending notification.")
-		self.pb.push_note("Twitch Notify", "{0} is now playing {1}.".format(streamer, game))
+		self.pbullet.push_note("Twitch Notify", "{0} is now playing {1}.".format(streamer, game))
 
 	### Access Twitch Api to check if the game has changed ###
 	def check_stream(self, streamer, client_id, url, oauth):
+		"""Access the TwitchAPI to get information about a stream/streamer"""
 		headers = {
 			"Accept": "application/vnd.twitchtv.v3+json",
 			"client_id": client_id,
@@ -102,7 +107,7 @@ class GameChanger(object):
 
 
 if __name__ == "__main__":
-	time_1 = time.time()
+	TIME1 = time.time()
 	GameChanger()
-	time_2 = time.time()
-	logging.debug("The script took %.2f seconds." % (time_2 - time_1))
+	TIME2 = time.time()
+	logging.debug("The script took %.2f seconds.", (TIME2 - TIME1))
