@@ -1,0 +1,19 @@
+2015-12-02 19:28:27,010 - INFO - Starting new HTTPS connection (1): api.pushbullet.com
+2015-12-02 19:28:27,794 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:27,981 - DEBUG - "GET /v2/devices HTTP/1.1" 200 None
+2015-12-02 19:28:27,983 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:28,267 - DEBUG - "GET /v2/contacts HTTP/1.1" 200 None
+2015-12-02 19:28:28,268 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:28,443 - DEBUG - "GET /v2/users/me HTTP/1.1" 200 None
+2015-12-02 19:28:28,444 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:28,677 - DEBUG - "GET /v2/channels HTTP/1.1" 200 None
+2015-12-02 19:28:28,679 - INFO - Starting new HTTPS connection (1): api.twitch.tv
+2015-12-02 19:28:29,515 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:29,840 - DEBUG - "GET /kraken/streams/lirik HTTP/1.1" 200 None
+2015-12-02 19:28:29,842 - INFO - Starting new HTTPS connection (1): api.twitch.tv
+2015-12-02 19:28:30,638 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:30,979 - DEBUG - "GET /kraken/streams/timmac HTTP/1.1" 200 None
+2015-12-02 19:28:30,981 - INFO - Starting new HTTPS connection (1): api.twitch.tv
+2015-12-02 19:28:31,814 - DEBUG - Setting read timeout to None
+2015-12-02 19:28:32,087 - DEBUG - "GET /kraken/streams/sevadus HTTP/1.1" 200 None
+2015-12-02 19:28:32,093 - DEBUG - It took 5.09 seconds.
